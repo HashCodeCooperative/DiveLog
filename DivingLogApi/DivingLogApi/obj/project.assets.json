@@ -658,23 +658,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\micha\\.nuget\\packages\\": {},
+    "C:\\Users\\Marcin\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\micha\\source\\repos\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj",
+      "projectUniqueName": "C:\\Users\\Marcin\\Source\\Repos\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj",
       "projectName": "DivingLogApi",
-      "projectPath": "C:\\Users\\micha\\source\\repos\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj",
-      "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\micha\\source\\repos\\DivingLogApi\\DivingLogApi\\obj\\",
+      "projectPath": "C:\\Users\\Marcin\\Source\\Repos\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj",
+      "packagesPath": "C:\\Users\\Marcin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Marcin\\Source\\Repos\\DiveLog\\DivingLogApi\\DivingLogApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Marcin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
