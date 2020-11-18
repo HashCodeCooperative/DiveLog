@@ -9,6 +9,11 @@ namespace DivingLogApi.Data
 {
     public class DivingLogContext : DbContext
     {
+        public DivingLogContext(DbContextOptions<DivingLogContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Dive> Dives { get; set; }
         public DbSet<DiveSite> DiveSites { get; set; }
         public DbSet<User> Users { get; set; }

@@ -12,47 +12,47 @@ namespace DivingLogApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserDivesController : ControllerBase
     {
         private readonly DivingLogContext _context;
 
-        public UsersController(DivingLogContext context)
+        public UserDivesController(DivingLogContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/UserDives
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDive>>> GetUserDives()
         {
-            return await _context.Users.Include(u => u.UserDives).ToListAsync();
+            return await _context.UserDives.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/UserDives/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UserDive>> GetUserDive(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var userDive = await _context.UserDives.FindAsync(id);
 
-            if (user == null)
+            if (userDive == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return userDive;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/UserDives/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUserDive(int id, UserDive userDive)
         {
-            if (id != user.UserId)
+            if (id != userDive.UserDiveId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(userDive).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace DivingLogApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserDiveExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace DivingLogApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/UserDives
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<UserDive>> PostUserDive(UserDive userDive)
         {
-            _context.Users.Add(user);
+            _context.UserDives.Add(userDive);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetUserDive", new { id = userDive.UserDiveId }, userDive);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/UserDives/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUserDive(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var userDive = await _context.UserDives.FindAsync(id);
+            if (userDive == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.UserDives.Remove(userDive);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserExists(int id)
+        private bool UserDiveExists(int id)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            return _context.UserDives.Any(e => e.UserDiveId == id);
         }
     }
 }

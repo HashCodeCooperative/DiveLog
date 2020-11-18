@@ -3,14 +3,16 @@ using System;
 using DivingLogApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DivingLogApi.Migrations
 {
     [DbContext(typeof(DivingLogContext))]
-    partial class DivingLogContextModelSnapshot : ModelSnapshot
+    [Migration("20201118202746_AddEnumSerialization")]
+    partial class AddEnumSerialization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
