@@ -25,7 +25,7 @@ namespace DivingLogApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDive>>> GetUserDives()
         {
-            return await _context.UserDives.ToListAsync();
+            return await _context.UserDives.Include(ud => ud.Dive).ToListAsync();
         }
 
         // GET: api/UserDives/5

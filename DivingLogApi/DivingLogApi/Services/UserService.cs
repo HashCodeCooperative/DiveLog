@@ -18,16 +18,26 @@ namespace DivingLogApi.Services
             _context = context;
         }
 
-        public async Task<ActionResult<IEnumerable<User>>> getAllUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             return await _context.Users.Include(u => u.UserDives).ToListAsync();
         }
 
-        //public List<User> getAllUsers()
-        //{
-        //    List<User> allUsers = _context.Users.ToList();
+        internal async Task<ActionResult<IEnumerable<UserDive>>> GetAllUserDives(int id)
+        {
 
-        //    return allUsers;
+            var userDives = _context.UserDives.Where(ud => ud.User.UserId == id).ToListAsync();
+
+            return await userDives;
+        }
+
+        //internal async Task<ActionResult<IEnumerable<UserDive>>> getAllUserDives(int id)
+        //{
+        //    var user = await _context.Users.Include(u => u.UserDives).ThenInclude(ud => ud.Dive).FirstAsync(u => u.UserId == id);
+
+        //    return user.UserDives;
         //}
+
+        
     }
 }

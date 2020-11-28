@@ -27,7 +27,14 @@ namespace DivingLogApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _userService.getAllUsers();
+            return await _userService.GetAllUsers();
+        }
+
+        // GET: api/Users/5/Dives
+        [HttpGet("{id}/Dives")]
+        public async Task<ActionResult<IEnumerable<UserDive>>> GetAllUserDives(int id)
+        {
+            return await _userService.GetAllUserDives(id);
         }
 
         //// GET: api/Users

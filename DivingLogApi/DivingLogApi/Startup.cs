@@ -43,6 +43,8 @@ namespace DivingLogApi
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<UserService>();
+            services.AddTransient<DiveService>();
+            services.AddTransient<DiveSiteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
