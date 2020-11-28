@@ -15,7 +15,6 @@ namespace DivingLogApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        //private readonly DivingLogContext _context;
         private UserService _userService;
 
         public UsersController(UserService userService)
@@ -27,14 +26,18 @@ namespace DivingLogApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _userService.GetAllUsers();
+            var allUsers = await Task.Run(() => _userService.GetAllUsers());
+            
+            return allUsers;
         }
 
         // GET: api/Users/5/Dives
         [HttpGet("{id}/Dives")]
         public async Task<ActionResult<IEnumerable<UserDive>>> GetAllUserDives(int id)
         {
-            return await _userService.GetAllUserDives(id);
+            var allUserDives = await Task.Run(() => _userService.GetAllUserDives(id));
+            
+            return allUserDives;
         }
 
         //// GET: api/Users

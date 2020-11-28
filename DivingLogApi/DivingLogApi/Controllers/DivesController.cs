@@ -25,14 +25,14 @@ namespace DivingLogApi.Controllers
             _diveService = diveService;
         }
 
+        // GET: api/Dives
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Dive>>> GetDives()
+        {
+            var allDives = await Task.Run(() => _diveService.GetAllDives());
 
-
-        //// GET: api/Dives
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Dive>>> GetDives()
-        //{
-        //    return await _context.Dives.Include(d => d.Divers).ToListAsync();
-        //}
+            return allDives;
+        }
 
         //// GET: api/Dives/5
         //[HttpGet("{id}")]

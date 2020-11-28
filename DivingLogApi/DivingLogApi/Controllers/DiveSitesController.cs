@@ -23,14 +23,14 @@ namespace DivingLogApi.Controllers
             _diveSiteService = diveSiteService;
         }
 
+        // GET: api/DiveSites
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<DiveSite>>> GetDiveSites()
+        {
+            var allDiveSites = await Task.Run(() => _diveSiteService.GetAllDiveSites());
 
-
-        //// GET: api/DiveSites
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<DiveSite>>> GetDiveSites()
-        //{
-        //    return await _context.DiveSites.ToListAsync();
-        //}
+            return allDiveSites;
+        }
 
         //// GET: api/DiveSites/5
         //[HttpGet("{id}")]
@@ -83,7 +83,7 @@ namespace DivingLogApi.Controllers
         {
             var createdDiveSite = await Task.Run(() => _diveSiteService.CreateDiveSite(diveSite));
 
-            return Ok(createdDiveSite) ;
+            return createdDiveSite;
         }
 
         //// DELETE: api/DiveSites/5

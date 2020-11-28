@@ -45,6 +45,7 @@ namespace DivingLogApi
             services.AddTransient<UserService>();
             services.AddTransient<DiveService>();
             services.AddTransient<DiveSiteService>();
+            services.AddTransient<UserDiveService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
