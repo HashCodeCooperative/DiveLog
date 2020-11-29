@@ -24,7 +24,7 @@ namespace DivingLogApi.Services
                 .Include(ud => ud.Dive)
                     .ThenInclude(d => d.DiveSite)
                 .Include(ud => ud.Dive)
-                    .ThenInclude(d => d.Divers)     //issue with geting divers - problem with model i guess
+                    .ThenInclude(d => d.Divers)
                 .FirstAsync(ud => ud.UserDiveId == id);
 
             return await userDiveDetails;

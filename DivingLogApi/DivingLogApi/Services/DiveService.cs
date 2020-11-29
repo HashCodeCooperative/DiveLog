@@ -20,7 +20,9 @@ namespace DivingLogApi.Services
 
         public async Task<ActionResult<IEnumerable<Dive>>> GetAllDives()
         {
-            var allDives = _context.Dives.ToListAsync();
+            var allDives = _context.Dives
+                //.Include(d => d.Divers)   //uncoment if you decide to eager load '<UserDive> aka Divers'
+                .ToListAsync();
 
             return await allDives;
         }

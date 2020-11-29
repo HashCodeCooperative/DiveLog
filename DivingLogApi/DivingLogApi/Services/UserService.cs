@@ -32,13 +32,5 @@ namespace DivingLogApi.Services
             return await userDives;
         }
 
-        //internal async Task<ActionResult<IEnumerable<UserDive>>> getAllUserDives(int id)
-        //{
-        //    var user = await _context.Users.Include(u => u.UserDives).ThenInclude(ud => ud.Dive).FirstAsync(u => u.UserId == id);
-
-        //    return user.UserDives;
-        //}
-
-        
     }
 }
