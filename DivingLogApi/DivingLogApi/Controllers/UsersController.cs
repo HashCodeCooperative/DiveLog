@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DivingLogApi.Data;
 using DivingLogApi.Models;
 using DivingLogApi.Services;
+using Newtonsoft.Json.Linq;
 
 namespace DivingLogApi.Controllers
 {
@@ -38,6 +39,15 @@ namespace DivingLogApi.Controllers
             var allUserDives = await Task.Run(() => _userService.GetAllUserDives(id));
             
             return allUserDives;
+        }
+
+        // GET: api/Users/5/statistics
+        [HttpGet("{id}/statistics")]
+        public async Task<ActionResult<JObject>> GetUsersStatistics(int id)
+        {
+            var userStats = await Task.Run(() => _userService.GetUserStatistics(id));
+
+            return userStats;
         }
 
         //// GET: api/Users
