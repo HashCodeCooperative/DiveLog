@@ -37,8 +37,9 @@ namespace DivingLogApi.Services
         {
             var user = await _context.Users.Include(u => u.UserDives).Where(u => u.UserId == userId).FirstAsync();
             var userName = user.FirstName;
-            var numberOfDives = user.UserDives.Count();
-            var deepestDiveDepth = 100; // temporary implementation
+            var userDives = user.UserDives;
+            var numberOfDives = userDives.Count;
+            var deepestDiveDepth = userDives.Max(ud => ud.MaxDepth);
             var longestDiveDuration = 80; // temporary implementantion
 
             string json = "{ 'userName': '"+
