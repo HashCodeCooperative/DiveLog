@@ -40,7 +40,7 @@ namespace DivingLogApi.Services
             var userDives = user.UserDives;
             var numberOfDives = userDives.Count;
             var deepestDiveDepth = userDives.Max(ud => ud.MaxDepth);
-            var longestDiveDuration = 80; // temporary implementantion
+            var longestDiveDuration = userDives.Max(ud => ud.DurationInMinutes); // temporary implementantion
 
             string json = "{ 'userName': '"+
                 userName +"', 'numberOfDives': '" +
