@@ -32,6 +32,15 @@ namespace DivingLogApi.Controllers
             return allDiveSites;
         }
 
+        // POST: api/DiveSites
+        [HttpPost]
+        public async Task<ActionResult<DiveSite>> CreateDiveSite(DiveSite diveSite)
+        {
+            var createdDiveSite = await Task.Run(() => _diveSiteService.CreateDiveSite(diveSite));
+
+            return createdDiveSite;
+        }
+
         //// GET: api/DiveSites/5
         //[HttpGet("{id}")]
         //public async Task<ActionResult<DiveSite>> GetDiveSite(int id)
@@ -77,14 +86,7 @@ namespace DivingLogApi.Controllers
         //    return NoContent();
         //}
 
-        // POST: api/DiveSites
-        [HttpPost]
-        public async Task<ActionResult<DiveSite>> CreateDiveSite(DiveSite diveSite)
-        {
-            var createdDiveSite = await Task.Run(() => _diveSiteService.CreateDiveSite(diveSite));
 
-            return createdDiveSite;
-        }
 
         //// DELETE: api/DiveSites/5
         //[HttpDelete("{id}")]

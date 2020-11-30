@@ -42,20 +42,23 @@ namespace DivingLogApi.Services
             var deepestDiveDepth = userDives.Max(ud => ud.MaxDepth);
             var longestDiveDuration = userDives.Max(ud => ud.DurationInMinutes); // temporary implementantion
 
-            string json = "{ 'userName': '"+
-                userName +"', 'numberOfDives': '" +
+            string json = "{ 'userName': '" +
+                userName + "', 'numberOfDives': '" +
                 numberOfDives + "', 'deepestDiveDepth': '" +
-                deepestDiveDepth + "', 'longestDiveDuration': '"+
-                longestDiveDuration +"' }";
+                deepestDiveDepth + "', 'longestDiveDuration': '" +
+                longestDiveDuration + "' }";
 
             JObject userDetails = JObject.Parse(json);
 
-            //JObject userDetails = JObject.Parse(
-            //    "{ 'userName': 'Lorenz', 'numberOfDives': '3', 'deepestDiveDepth': '70', 'longestDiveDuration': '83' }"
-            //    );
-            
             return userDetails;
         }
 
+        public async Task<ActionResult<User>> RegisterUser(User user)
+        {
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
     }
 }

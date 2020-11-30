@@ -16,11 +16,13 @@ namespace DivingLogApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private UserService _userService;
+        private readonly UserService _userService;
+        private readonly UserDiveService _userDiveService;
 
-        public UsersController(UserService userService)
+        public UsersController(UserService userService, UserDiveService userDiveService)
         {
             _userService = userService;
+            _userDiveService = userDiveService;
         }
 
         // GET: api/Users
@@ -48,6 +50,24 @@ namespace DivingLogApi.Controllers
             var userStats = await Task.Run(() => _userService.GetUserStatistics(id));
 
             return userStats;
+        }
+
+        // POST: api/Users
+        [HttpPost]
+        public async Task<ActionResult<User>> RegisterUser(User user)
+        {
+            var registeredUser = await Task.Run(() => _userService.RegisterUser(user));
+
+            return registeredUser;
+        }
+
+        // POST: api/Users/5/UserDives
+        [HttpPost("{userId}/UserDives")]
+        public async Task<ActionResult<UserDive>> RegisterNewDive(UserDive userDive, int userId)
+        {
+            var registeredDive = await Task.Run(() => _userDiveService.RegisterNewDive(userDive, userId));
+
+            return registeredDive;
         }
 
         //// GET: api/Users

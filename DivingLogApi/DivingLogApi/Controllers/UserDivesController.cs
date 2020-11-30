@@ -31,6 +31,7 @@ namespace DivingLogApi.Controllers
             return userDiveDetails;
         }
 
+       
         //// GET: api/UserDives
         //[HttpGet]
         //public async Task<ActionResult<IEnumerable<UserDive>>> GetUserDives()
