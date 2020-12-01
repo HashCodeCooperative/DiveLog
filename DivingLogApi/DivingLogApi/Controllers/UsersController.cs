@@ -61,11 +61,11 @@ namespace DivingLogApi.Controllers
             return registeredUser;
         }
 
-        // POST: api/Users/5/UserDives
-        [HttpPost("{userId}/UserDives")]
-        public async Task<ActionResult<UserDive>> RegisterNewDive(UserDive userDive, int userId)
+        // POST: api/Users/5/UserDives/DiveSites/3
+        [HttpPost("{userId}/UserDives/DiveSites/{diveSiteId}")]
+        public async Task<ActionResult<UserDive>> RegisterNewDive(UserDive userDive, int userId, int diveSiteId)
         {
-            var registeredDive = await Task.Run(() => _userDiveService.RegisterNewDive(userDive, userId));
+            var registeredDive = await Task.Run(() => _userDiveService.RegisterNewDive(userDive, userId, diveSiteId));
 
             return registeredDive;
         }

@@ -31,12 +31,13 @@ namespace DivingLogApi.Services
             return await userDiveDetails;
         }
 
-        public async Task<ActionResult<UserDive>> RegisterNewDive(UserDive userDive, int userId)
+        public async Task<ActionResult<UserDive>> RegisterNewDive(UserDive userDive, int userId, int diveSiteId)
         {
             var diveToRegister = userDive;
-            diveToRegister.User = await _context.Users.Where(u => u.UserId == userId).FirstAsync();
-            //TODO: need to find a way to insert existing or create new one dive site
 
+            diveToRegister.User = await _context.Users.Where(u => u.UserId == userId).FirstAsync();
+            diveToRegister.Dive.DiveSite = await _context.DiveSites.Where(ds => ds.DiveSiteId == diveSiteId).FirstAsync();
+            
             _context.UserDives.Add(diveToRegister);
             await _context.SaveChangesAsync();
 
