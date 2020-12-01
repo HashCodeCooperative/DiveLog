@@ -9,10 +9,10 @@ namespace DivingLogApi.Models
     public class UserDive
     {
         public int UserDiveId { get; set; }
-        public DateTime Duration { get; set; }
         public DivingSuit DivingSuit { get; set; }
         public Gas Gas { get; set; }
         public CylinderType CylinderType { get; set; }
+        public int DurationInMinutes { get; set; }
         public int CylinderCapacity { get; set; }
         public int CylStartPressure { get; set; }
         public int CylEndPressure { get; set; }

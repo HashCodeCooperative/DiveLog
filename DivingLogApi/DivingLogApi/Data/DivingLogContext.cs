@@ -21,11 +21,5 @@ namespace DivingLogApi.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite("Data Source=Data/DivingLogDb.db");
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<MyContext>(modelBuilder);
-        //    Database.SetInitializer(sqliteConnectionInitializer);
-        //}
     }
 }

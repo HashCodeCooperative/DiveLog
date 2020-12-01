@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DivingLogApi.Data;
 using DivingLogApi.Models;
+using DivingLogApi.Services;
+using Newtonsoft.Json.Linq;
 
 namespace DivingLogApi.Controllers
 {
@@ -14,95 +16,59 @@ namespace DivingLogApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly DivingLogContext _context;
+        private readonly UserService _userService;
+        private readonly UserDiveService _userDiveService;
 
-        public UsersController(DivingLogContext context)
+        public UsersController(UserService userService, UserDiveService userDiveService)
         {
-            _context = context;
+            _userService = userService;
+            _userDiveService = userDiveService;
         }
 
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.Include(u => u.UserDives).ToListAsync();
+            var allUsers = await Task.Run(() => _userService.GetAllUsers());
+            
+            return allUsers;
         }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        // GET: api/Users/5/Dives
+        [HttpGet("{id}/Dives")]
+        public async Task<ActionResult<IEnumerable<UserDive>>> GetAllUserDives(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
+            var allUserDives = await Task.Run(() => _userService.GetAllUserDives(id));
+            
+            return allUserDives;
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        // GET: api/Users/5/statistics
+        [HttpGet("{id}/statistics")]
+        public async Task<ActionResult<JObject>> GetUsersStatistics(int id)
         {
-            if (id != user.UserId)
-            {
-                return BadRequest();
-            }
+            var userStats = await Task.Run(() => _userService.GetUserStatistics(id));
 
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return userStats;
         }
 
         // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> RegisterUser(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            var registeredUser = await Task.Run(() => _userService.RegisterUser(user));
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return registeredUser;
         }
 
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        // POST: api/Users/5/UserDives/DiveSites/3
+        [HttpPost("{userId}/UserDives/DiveSites/{diveSiteId}")]
+        public async Task<ActionResult<UserDive>> RegisterNewDive(UserDive userDive, int userId, int diveSiteId)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var registeredDive = await Task.Run(() => _userDiveService.RegisterNewDive(userDive, userId, diveSiteId));
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return registeredDive;
         }
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.UserId == id);
-        }
     }
 }
