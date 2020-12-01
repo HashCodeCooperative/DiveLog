@@ -1,4 +1,5 @@
 using DivingLogApi.Data;
+using DivingLogApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,6 +41,11 @@ namespace DivingLogApi
             services.AddControllersWithViews()
                     .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddTransient<UserService>();
+            services.AddTransient<DiveService>();
+            services.AddTransient<DiveSiteService>();
+            services.AddTransient<UserDiveService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
