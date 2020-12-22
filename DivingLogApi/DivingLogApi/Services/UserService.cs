@@ -30,10 +30,10 @@ namespace DivingLogApi.Services
         {
             var userDives = _context.UserDives
                 .Include(ud => ud.Dive)
+                    .ThenInclude(d => d.DiveSite)
+                .Include(ud => ud.Dive)
                     .ThenInclude(d => d.Divers)
                         .ThenInclude(d => d.User)
-                .Include(ud => ud.Dive)
-                    .ThenInclude(d => d.DiveSite)
                 .Where(ud => ud.User.UserId == id)
                 .ToListAsync();
 
