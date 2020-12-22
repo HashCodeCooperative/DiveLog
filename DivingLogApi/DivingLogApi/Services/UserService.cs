@@ -28,7 +28,14 @@ namespace DivingLogApi.Services
 
         public async Task<ActionResult<IEnumerable<UserDive>>> GetAllUserDives(int id)
         {
-            var userDives = _context.UserDives.Where(ud => ud.User.UserId == id).ToListAsync();
+            var userDives = _context.UserDives
+                .Include(ud => ud.Dive)
+                    .ThenInclude(d => d.Divers)
+                        .ThenInclude(d => d.User)
+                .Include(ud => ud.Dive)
+                    .ThenInclude(d => d.DiveSite)
+                .Where(ud => ud.User.UserId == id)
+                .ToListAsync();
 
             return await userDives;
         }
