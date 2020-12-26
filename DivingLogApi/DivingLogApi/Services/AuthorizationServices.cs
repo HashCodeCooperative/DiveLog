@@ -20,21 +20,35 @@ namespace DivingLogApi.Services
             this.context = context;
         }
 
-        public async Task<User> Login(string login, string password)
+        public async Task<bool> Delete(string login, string password)
         {
             var user = await context.Users.FirstOrDefaultAsync(name => name.Login == login);
 
-            if (user is null)
-            {
-                return null;
-            }
+            if (user is null) 
+                return false; 
 
             var passwordIsCorrect = IsPasswordCorrect(password, user.PasswordHash, user.PasswordSalt);
 
             if (!passwordIsCorrect)
-            {
-                return null;
-            }
+                return false;
+
+            context.Users.Remove(user);
+            context.SaveChangesAsync();
+            return true;
+        }
+
+
+        public async Task<User> Login(string login, string password)
+        {
+            var user = await context.Users.FirstOrDefaultAsync(name => name.Login == login);
+
+            if (user is null) 
+                return null; 
+
+            var passwordIsCorrect = IsPasswordCorrect(password, user.PasswordHash, user.PasswordSalt);
+
+            if (!passwordIsCorrect) 
+                return null; 
 
             return user;
         }

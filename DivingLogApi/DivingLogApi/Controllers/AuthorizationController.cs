@@ -2,6 +2,7 @@
 using DivingLogApi.Models;
 using DivingLogApi.Services;
 using DotNetOpenAuth.InfoCard;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace DivingLogApi.Controllers
 {
+    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthorizationController : ControllerBase
@@ -22,18 +24,18 @@ namespace DivingLogApi.Controllers
         private readonly IAuthorizationServices services;
         private readonly IConfiguration configuration;
 
-        public AuthorizationController(IAuthorizationServices services, IConfiguration configuration )
+        public AuthorizationController(IAuthorizationServices services, IConfiguration configuration)
         {
             this.configuration = configuration;
             this.services = services;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody]UserForAuthorizationDto userDto)
+        public async Task<IActionResult> Register([FromBody] UserForAuthorizationDto userDto)
         {
             userDto.Login = userDto.Login.ToLower();
 
-            if(await services.UserExist(userDto.Login))
+            if (await services.UserExist(userDto.Login))
             {
                 return BadRequest("Podany login jest już zajęty");
             }
@@ -41,13 +43,39 @@ namespace DivingLogApi.Controllers
             var userToCreate = new User
             {
                 Login = userDto.Login,
+                About = userDto.About,
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
             };
 
-             
+
             await services.Register(userToCreate, userDto.Password);
 
             return StatusCode(201);
         }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> RemoveUser([FromBody] UserForAuthorizationDto userDto)
+        {
+            userDto.Login = userDto.Login.ToLower();
+
+            if (!await services.UserExist(userDto.Login))
+            {
+                return BadRequest("Podany login nie istnieje");
+            }
+             
+            if(await services.Delete(userDto.Login, userDto.Password))
+            {
+                return BadRequest("Usuwanie nie powiodło się. Sprawdź, czy podałeś poprawne hasło.");
+            }
+
+            
+
+            return StatusCode(201); 
+        }
+
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto loginDto)
@@ -78,6 +106,6 @@ namespace DivingLogApi.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return Ok(new { token = tokenHandler.WriteToken(token) });
-        } 
+        }
     }
 }

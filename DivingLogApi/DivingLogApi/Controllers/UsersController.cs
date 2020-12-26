@@ -9,9 +9,11 @@ using DivingLogApi.Data;
 using DivingLogApi.Models;
 using DivingLogApi.Services;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Cors;
 
 namespace DivingLogApi.Controllers
 {
+    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -44,6 +46,7 @@ namespace DivingLogApi.Controllers
         }
 
         // GET: api/Users/5/statistics
+        
         [HttpGet("{id}/statistics")]
         public async Task<ActionResult<JObject>> GetUsersStatistics(int id)
         {

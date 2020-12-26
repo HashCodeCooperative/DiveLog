@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using DivingLogApi.Data;
 using DivingLogApi.Models;
 using DivingLogApi.Services;
+using Microsoft.AspNetCore.Cors;
 
 namespace DivingLogApi.Controllers
 {
+    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class DivesController : ControllerBase
@@ -26,13 +28,25 @@ namespace DivingLogApi.Controllers
         }
 
         // GET: api/Dives
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Dive>>> GetDives()
         {
-            var allDives = await Task.Run(() => _diveService.GetAllDives());
-
+            var allDives = await Task.Run(() => _diveService.GetAllDives()); 
             return allDives;
         }
+
+        //[HttpPost("{id}")]
+        //public async Task<ActionResult<Dive>> DiveEdit()
+        //{
+
+
+
+        //}
+
+
+
+
 
     }
 }

@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using DivingLogApi.Data;
 using DivingLogApi.Models;
 using DivingLogApi.Services;
+using Microsoft.AspNetCore.Cors;
 
 namespace DivingLogApi.Controllers
 {
+    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class DiveSitesController : ControllerBase

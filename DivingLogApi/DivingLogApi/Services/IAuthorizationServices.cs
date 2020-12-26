@@ -8,5 +8,6 @@ namespace DivingLogApi.Services
         Task<User> Login(string login, string password);
         Task<User> Register(User user, string password);
         Task<bool> UserExist(string login);
+        Task<bool> Delete(string login, string password);
     }
 }

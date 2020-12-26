@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\micha\\Desktop\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj": {}
+    "C:\\Users\\micha\\OneDrive\\Pulpit\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\micha\\Desktop\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj": {
+    "C:\\Users\\micha\\OneDrive\\Pulpit\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\micha\\Desktop\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj",
+        "projectUniqueName": "C:\\Users\\micha\\OneDrive\\Pulpit\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj",
         "projectName": "DivingLogApi",
-        "projectPath": "C:\\Users\\micha\\Desktop\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj",
+        "projectPath": "C:\\Users\\micha\\OneDrive\\Pulpit\\DiveLog\\DivingLogApi\\DivingLogApi\\DivingLogApi.csproj",
         "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\micha\\Desktop\\DiveLog\\DivingLogApi\\DivingLogApi\\obj\\",
+        "outputPath": "C:\\Users\\micha\\OneDrive\\Pulpit\\DiveLog\\DivingLogApi\\DivingLogApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -43,6 +40,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
             "DotNetOpenAuth.InfoCard.UI": {
               "target": "Package",
               "version": "[4.3.4.13329, )"
@@ -118,7 +119,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
