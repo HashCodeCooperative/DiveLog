@@ -22,8 +22,7 @@ namespace DivingLogApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-
+        { 
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -33,8 +32,7 @@ namespace DivingLogApi
                                       .AllowAnyMethod(); ;
                                   });
             }); 
-
-
+             
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -44,7 +42,9 @@ namespace DivingLogApi
             services.AddDbContext<DivingLogContext>(options =>
                     options.UseSqlite("Data Source=Data/DivingLogDb.db"));
 
-            services.AddControllersWithViews()
+            
+
+            services.AddControllersWithViews() 
                     .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
@@ -70,7 +70,7 @@ namespace DivingLogApi
 
             app.UseRouting();
             app.UseCors();
-            app.UseAuthorization();
+           // app.UseAuthorization();
             
 
             app.UseEndpoints(endpoints =>

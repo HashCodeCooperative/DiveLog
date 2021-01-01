@@ -27,9 +27,8 @@ namespace DivingLogApi.Controllers
         // GET: api/UserDives/5
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDive>> GetUserDiveDetails(int id)
-        {
-            var userDiveDetails = await Task.Run(() => _userDiveService.GetUserDiveDetails(id)); 
-            return userDiveDetails;
+        { 
+            return await _userDiveService.GetUserDiveDetails(id);
         } 
     }
 }

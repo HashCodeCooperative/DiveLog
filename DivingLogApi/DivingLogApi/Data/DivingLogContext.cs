@@ -20,6 +20,15 @@ namespace DivingLogApi.Data
         public DbSet<UserDive> UserDives { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=Data/DivingLogDb.db");
+            => options.UseSqlite("Data Source=Data/DivingLogDb.db")
+            .EnableSensitiveDataLogging(true);
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Dive>()
+                .HasKey(b => b.DiveId)
+                .HasName("DiveId"); 
+
+        }
     }
 }

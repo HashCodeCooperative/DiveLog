@@ -30,47 +30,30 @@ namespace DivingLogApi.Controllers
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-        {
-            var allUsers = await Task.Run(() => _userService.GetAllUsers());
-            
-            return allUsers;
+        { 
+            return await _userService.GetAllUsers();
         }
 
         // GET: api/Users/5/Dives
         [HttpGet("{id}/Dives")]
         public async Task<ActionResult<IEnumerable<UserDive>>> GetAllUserDives(int id)
-        {
-            var allUserDives = await Task.Run(() => _userService.GetAllUserDives(id));
-            
-            return allUserDives;
+        { 
+            return await _userService.GetAllUserDives(id);
         }
 
         // GET: api/Users/5/statistics
         
         [HttpGet("{id}/statistics")]
         public async Task<ActionResult<JObject>> GetUsersStatistics(int id)
-        {
-            var userStats = await Task.Run(() => _userService.GetUserStatistics(id));
-
-            return userStats;
+        { 
+            return await _userService.GetUserStatistics(id);
         }
-
-        // POST: api/Users
-        [HttpPost]
-        public async Task<ActionResult<User>> RegisterUser(User user)
-        {
-            var registeredUser = await Task.Run(() => _userService.RegisterUser(user));
-
-            return registeredUser;
-        }
-
+         
         // POST: api/Users/5/UserDives/DiveSites/3
         [HttpPost("{userId}/UserDives/DiveSites/{diveSiteId}")]
         public async Task<ActionResult<UserDive>> RegisterNewDive(UserDive userDive, int userId, int diveSiteId)
-        {
-            var registeredDive = await Task.Run(() => _userDiveService.RegisterNewDive(userDive, userId, diveSiteId));
-
-            return registeredDive;
+        { 
+            return await _userDiveService.RegisterNewDive(userDive, userId, diveSiteId);
         }
 
     }

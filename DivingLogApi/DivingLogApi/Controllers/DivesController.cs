@@ -28,25 +28,29 @@ namespace DivingLogApi.Controllers
         }
 
         // GET: api/Dives
-       
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Dive>>> GetDives()
         {
-            var allDives = await Task.Run(() => _diveService.GetAllDives()); 
-            return allDives;
+            return await _diveService.GetAllDives();
         }
 
-        //[HttpPost("{id}")]
-        //public async Task<ActionResult<Dive>> DiveEdit()
-        //{
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Dive>> DiveEdit(int id, Dive dive)
+        {
+            _diveService.DiveEdit(dive, id);
+            return Ok(dive);
+        }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Dive>> DeleteDive(int id)
+        {
+            var isDelete = await _diveService.DeleteDive(id);
 
-
-        //}
-
-
-
-
-
+            if (isDelete)
+                return Ok();
+            else
+                return BadRequest();
+        } 
     }
 }

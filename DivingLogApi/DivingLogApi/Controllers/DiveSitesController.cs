@@ -28,19 +28,15 @@ namespace DivingLogApi.Controllers
         // GET: api/DiveSites
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DiveSite>>> GetDiveSites()
-        {
-            var allDiveSites = await Task.Run(() => _diveSiteService.GetAllDiveSites());
-
-            return allDiveSites;
+        { 
+            return await _diveSiteService.GetAllDiveSites();
         }
 
         // POST: api/DiveSites
         [HttpPost]
         public async Task<ActionResult<DiveSite>> CreateDiveSite(DiveSite diveSite)
-        {
-            var createdDiveSite = await Task.Run(() => _diveSiteService.CreateDiveSite(diveSite));
-
-            return createdDiveSite;
+        { 
+            return await _diveSiteService.CreateDiveSite(diveSite);
         }
 
     }

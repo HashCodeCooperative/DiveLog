@@ -11,7 +11,7 @@ namespace DivingLogApi.Models
         public string Name { get; set; }
         public string GPSPosition { get; set; }
         public string Description { get; set; }
-        public List<Dive> Dives { get; set; }
+        //public List<Dive> Dives { get; set; }
 
     }
 }

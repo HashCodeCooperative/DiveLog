@@ -1,13 +1,14 @@
 ﻿using DivingLogApi.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DivingLogApi.Models
 {
     public class Dive
-    {
+    { 
         public int DiveId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
